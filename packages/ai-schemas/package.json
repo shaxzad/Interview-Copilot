@@ -1,0 +1,19 @@
+{
+  "name": "@interview-copilot/ai-schemas",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI validation schemas using Zod",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

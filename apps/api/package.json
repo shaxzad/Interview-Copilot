@@ -1,0 +1,33 @@
+{
+  "name": "@interview-copilot/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Interview Copilot API Server",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "lint": "eslint src --ext ts"
+  },
+  "dependencies": {
+    "fastify": "^4.25.0",
+    "@fastify/cors": "^8.5.0",
+    "@fastify/env": "^4.2.0",
+    "@fastify/helmet": "^11.1.0",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.0",
+    "zod": "^3.22.0",
+    "axios": "^1.6.0",
+    "@interview-copilot/shared-types": "workspace:*",
+    "@interview-copilot/ai-schemas": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.0",
+    "vitest": "^1.1.0"
+  }
+}

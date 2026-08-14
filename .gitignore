@@ -1,0 +1,29 @@
+.DS_Store
+node_modules/
+dist/
+build/
+*.log
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Tauri
+apps/desktop/src-tauri/target/
+apps/desktop/target/
+
+# Build outputs
+*.tsbuildinfo
