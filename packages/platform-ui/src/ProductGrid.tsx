@@ -14,7 +14,11 @@ export type ProductTile = {
 export const ProductGrid = ({ items, id }: { items: ProductTile[]; id?: string }) => (
   <section className="product-grid" id={id}>
     {items.map((item) => (
-      <article className={`product-tile ${item.featured ? 'featured' : ''}`} id={item.id} key={item.id}>
+      <article
+        className={`product-tile ${item.featured ? 'featured' : ''}`}
+        id={item.id}
+        key={item.id}
+      >
         {item.index && <span className="tile-index">{item.index}</span>}
         <h2>{item.title}</h2>
         <p>{item.description}</p>

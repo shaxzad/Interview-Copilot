@@ -7,7 +7,13 @@ export type AppShellProps = PropsWithChildren<{
   sidebar?: ReactNode;
 }>;
 
-export const AppShell = ({ productName, navigation, actions, sidebar, children }: AppShellProps) => (
+export const AppShell = ({
+  productName,
+  navigation,
+  actions,
+  sidebar,
+  children,
+}: AppShellProps) => (
   <div className="platform-shell">
     <header className="platform-header">
       <a className="platform-brand" href="/" aria-label={`${productName} home`}>

@@ -33,11 +33,7 @@ export const SessionSchema = z.object({
 export type AuthSession = z.infer<typeof SessionSchema>;
 
 export type AuthErrorCode =
-  | 'UNAUTHENTICATED'
-  | 'FORBIDDEN'
-  | 'INVALID_REQUEST'
-  | 'NETWORK_ERROR'
-  | 'UNKNOWN';
+  'UNAUTHENTICATED' | 'FORBIDDEN' | 'INVALID_REQUEST' | 'NETWORK_ERROR' | 'UNKNOWN';
 
 export type AuthError = {
   code: AuthErrorCode;

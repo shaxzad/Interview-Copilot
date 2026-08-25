@@ -516,11 +516,7 @@ const InterviewWorkspace: React.FC = () => {
               <small>Sign out of this Desktop app</small>
             </span>
 
-            <button
-              className="settings-sign-out"
-              type="button"
-              onClick={() => void signOut()}
-            >
+            <button className="settings-sign-out" type="button" onClick={() => void signOut()}>
               Sign out
             </button>
           </div>

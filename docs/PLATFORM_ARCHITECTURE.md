@@ -57,7 +57,7 @@ const authClient = new AuthClient({
   <AppShell productName="Interview Copilot" actions={<AccountMenu />}>
     <ProductRoutes />
   </AppShell>
-</AuthProvider>
+</AuthProvider>;
 ```
 
 ## API boundary
@@ -85,9 +85,11 @@ await app.register(tenancyFastify, {
 
 app.get('/students', async (request) => {
   await request.requireTenant();
-  return students.find({
-    ...tenantFilter(request.tenant!),
-  }).toArray();
+  return students
+    .find({
+      ...tenantFilter(request.tenant!),
+    })
+    .toArray();
 });
 ```
 

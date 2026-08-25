@@ -42,6 +42,7 @@ GET /health
 Returns the API health status.
 
 **Response:**
+
 ```json
 {
   "status": "ok",
@@ -52,16 +53,19 @@ Returns the API health status.
 ### Interviews
 
 #### List Interviews
+
 ```
 GET /interviews
 ```
 
 #### Create Interview
+
 ```
 POST /interviews
 ```
 
 **Request Body:**
+
 ```json
 {
   "title": "Technical Interview",
@@ -71,16 +75,19 @@ POST /interviews
 ```
 
 #### Get Interview
+
 ```
 GET /interviews/:id
 ```
 
 #### Update Interview
+
 ```
 PUT /interviews/:id
 ```
 
 #### Delete Interview
+
 ```
 DELETE /interviews/:id
 ```
@@ -88,11 +95,13 @@ DELETE /interviews/:id
 ### Questions
 
 #### Generate Questions
+
 ```
 POST /questions/generate
 ```
 
 **Request Body:**
+
 ```json
 {
   "category": "algorithms",
@@ -105,11 +114,13 @@ POST /questions/generate
 ### Feedback
 
 #### Submit Answer
+
 ```
 POST /feedback/evaluate
 ```
 
 **Request Body:**
+
 ```json
 {
   "questionId": "q123",
@@ -119,6 +130,7 @@ POST /feedback/evaluate
 ```
 
 #### Get Feedback
+
 ```
 GET /feedback/:sessionId
 ```

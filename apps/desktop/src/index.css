@@ -1468,8 +1468,7 @@ body {
   gap: 70px;
   padding: 60px max(28px, 8vw);
   background:
-    radial-gradient(circle at 12% 18%, rgba(232, 111, 81, 0.12), transparent 34%),
-    #111313;
+    radial-gradient(circle at 12% 18%, rgba(232, 111, 81, 0.12), transparent 34%), #111313;
 }
 
 .desktop-auth-brand {
