@@ -5,11 +5,16 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": { "build": "tsc", "test": "exit 0" },
+  "scripts": {
+    "build": "tsc",
+    "test": "exit 0"
+  },
   "dependencies": {
     "@company/auth-contracts": "workspace:*",
     "fastify": "^4.25.0",
     "fastify-plugin": "^4.5.1"
   },
-  "devDependencies": { "typescript": "^5.3.3" }
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
 }
