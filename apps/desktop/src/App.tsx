@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 type SessionType = 'technical' | 'coding' | 'system-design' | 'behavioral';
 
@@ -14,6 +14,29 @@ type TranscriptItem = {
   speaker: 'Interviewer' | 'You';
   text: string;
   time: string;
+};
+
+type SpeechRecognitionResultEvent = Event & {
+  resultIndex: number;
+  results: SpeechRecognitionResultList;
+};
+
+type SpeechRecognitionInstance = {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onend: (() => void) | null;
+  onerror: ((event: Event) => void) | null;
+  onresult: ((event: SpeechRecognitionResultEvent) => void) | null;
+  start: () => void;
+  stop: () => void;
+};
+
+type SpeechRecognitionConstructor = new () => SpeechRecognitionInstance;
+
+type SpeechRecognitionWindow = Window & {
+  SpeechRecognition?: SpeechRecognitionConstructor;
+  webkitSpeechRecognition?: SpeechRecognitionConstructor;
 };
 
 const SESSION_TYPES: SessionConfig[] = [
@@ -105,11 +128,21 @@ const App: React.FC = () => {
 
   const [transcript, setTranscript] = useState<TranscriptItem[]>(INITIAL_TRANSCRIPT);
 
+  const [interimTranscript, setInterimTranscript] = useState('');
+
+  const [microphoneError, setMicrophoneError] = useState('');
+
   const [questionInput, setQuestionInput] = useState('');
 
   const [isGenerating, setIsGenerating] = useState(false);
 
   const [showSettings, setShowSettings] = useState(false);
+
+  const [isPrivacyMode, setIsPrivacyMode] = useState(false);
+
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
+
+  const sessionSecondsRef = useRef(0);
 
   /*
    * Session timer
@@ -128,6 +161,87 @@ const App: React.FC = () => {
     };
   }, [activeSession, isPaused]);
 
+  useEffect(() => {
+    sessionSecondsRef.current = sessionSeconds;
+  }, [sessionSeconds]);
+
+  useEffect(() => {
+    if (!activeSession || !isListening || isPaused) {
+      recognitionRef.current?.stop();
+      recognitionRef.current = null;
+      setInterimTranscript('');
+      return;
+    }
+
+    const speechWindow = window as SpeechRecognitionWindow;
+    const Recognition = speechWindow.SpeechRecognition ?? speechWindow.webkitSpeechRecognition;
+
+    if (!Recognition) {
+      setMicrophoneError('Live transcription is not available in this desktop runtime.');
+      return;
+    }
+
+    const recognition = new Recognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+    recognition.onresult = (event) => {
+      let finalText = '';
+      let currentInterim = '';
+
+      for (let index = event.resultIndex; index < event.results.length; index += 1) {
+        const result = event.results[index];
+        const text = result[0]?.transcript ?? '';
+
+        if (result.isFinal) {
+          finalText += text;
+        } else {
+          currentInterim += text;
+        }
+      }
+
+      if (finalText.trim()) {
+        setTranscript((items) => [
+          ...items,
+          {
+            id: Date.now(),
+            speaker: 'You',
+            text: finalText.trim(),
+            time: formatTime(sessionSecondsRef.current),
+          },
+        ]);
+      }
+
+      setInterimTranscript(currentInterim.trim());
+    };
+    recognition.onerror = () => {
+      setMicrophoneError('Microphone access was interrupted. Check your permissions and try again.');
+    };
+    recognition.onend = () => {
+      if (recognitionRef.current === recognition && isListening && !isPaused) {
+        recognition.start();
+      }
+    };
+
+    recognitionRef.current = recognition;
+    setMicrophoneError('');
+
+    try {
+      recognition.start();
+    } catch {
+      setMicrophoneError('Unable to start the microphone. Check your permissions and try again.');
+    }
+
+    return () => {
+      recognition.onend = null;
+      recognition.stop();
+
+      if (recognitionRef.current === recognition) {
+        recognitionRef.current = null;
+      }
+    };
+  }, [activeSession, isListening, isPaused]);
+
   const selectedSessionTitle = useMemo(() => getSessionTitle(selectedSession), [selectedSession]);
 
   const startSession = () => {
@@ -135,6 +249,7 @@ const App: React.FC = () => {
     setSessionSeconds(0);
     setIsPaused(false);
     setIsListening(true);
+    setIsPrivacyMode(false);
 
     setTranscript(INITIAL_TRANSCRIPT);
 
@@ -163,7 +278,15 @@ const App: React.FC = () => {
     setActiveSession(null);
     setIsListening(false);
     setIsPaused(false);
+    setIsPrivacyMode(false);
     setSessionSeconds(0);
+  };
+
+  const togglePrivacyMode = () => {
+    setIsPrivacyMode((enabled) => !enabled);
+    setIsListening(false);
+    setIsPaused(true);
+    setInterimTranscript('');
   };
 
   const togglePause = () => {
@@ -355,6 +478,34 @@ const App: React.FC = () => {
         </div>
       </header>
 
+      {showSettings && (
+        <div className="settings-popover">
+          <div className="settings-title">Settings</div>
+
+          <div className="settings-row">
+            <span>AI Provider</span>
+            <span className="settings-value">Not connected</span>
+          </div>
+
+          <div className="settings-row privacy-setting-row">
+            <span>
+              <strong>Privacy Mode</strong>
+              <small>Pause capture and hide session content</small>
+            </span>
+
+            <button
+              className={`privacy-toggle ${isPrivacyMode ? 'enabled' : ''}`}
+              type="button"
+              onClick={togglePrivacyMode}
+              aria-pressed={isPrivacyMode}
+              aria-label={`${isPrivacyMode ? 'Disable' : 'Enable'} Privacy Mode`}
+            >
+              <span />
+            </button>
+          </div>
+        </div>
+      )}
+
       <main className="workspace">
         <div className="workspace-title-row">
           <div>
@@ -367,7 +518,7 @@ const App: React.FC = () => {
 
           <div className="live-indicator">
             <span />
-            {isListening ? 'LIVE' : 'PAUSED'}
+            {isPrivacyMode ? 'PRIVATE' : isListening ? 'LIVE' : 'PAUSED'}
           </div>
         </div>
 
@@ -391,21 +542,29 @@ const App: React.FC = () => {
             </div>
 
             <div className="transcript-content">
-              {transcript.map((item) => (
-                <div
-                  key={item.id}
-                  className={`transcript-item ${item.speaker === 'You' ? 'you' : ''}`}
-                >
-                  <div className="transcript-meta">
-                    <span>{item.speaker}</span>
-                    <time>{item.time}</time>
-                  </div>
-
-                  <p>{item.text}</p>
+              {isPrivacyMode ? (
+                <div className="privacy-notice">
+                  <LockIcon />
+                  <strong>Transcript hidden</strong>
+                  <span>Privacy Mode is pausing microphone capture.</span>
                 </div>
-              ))}
+              ) : (
+                transcript.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`transcript-item ${item.speaker === 'You' ? 'you' : ''}`}
+                  >
+                    <div className="transcript-meta">
+                      <span>{item.speaker}</span>
+                      <time>{item.time}</time>
+                    </div>
 
-              {isListening && (
+                    <p>{item.text}</p>
+                  </div>
+                ))
+              )}
+
+              {!isPrivacyMode && isListening && (
                 <div className="transcript-listening">
                   <div className="audio-bars">
                     <span />
@@ -414,9 +573,13 @@ const App: React.FC = () => {
                     <span />
                     <span />
                   </div>
-                  Listening for conversation...
+                  <span>
+                    {interimTranscript || 'Listening for conversation...'}
+                  </span>
                 </div>
               )}
+
+              {microphoneError && <div className="transcript-error">{microphoneError}</div>}
             </div>
           </section>
 
@@ -436,34 +599,42 @@ const App: React.FC = () => {
             </div>
 
             <div className="copilot-content">
-              <div className="copilot-section">
-                <div className="section-label">DETECTED QUESTION</div>
-
-                <div className="question-box">{question}</div>
-              </div>
-
-              <div className="divider" />
-
-              <div className="copilot-section">
-                <div className="section-label">SUGGESTED APPROACH</div>
-
-                <div className="answer-box">
-                  {isGenerating ? (
-                    <div className="generating">
-                      <div className="loading-dots">
-                        <span />
-                        <span />
-                        <span />
-                      </div>
-                      Generating response...
-                    </div>
-                  ) : (
-                    answer
-                  )}
+              {isPrivacyMode ? (
+                <div className="privacy-notice">
+                  <LockIcon />
+                  <strong>Copilot paused</strong>
+                  <span>AI suggestions are hidden while Privacy Mode is active.</span>
                 </div>
-              </div>
+              ) : (
+                <>
+                  <div className="copilot-section">
+                    <div className="section-label">DETECTED QUESTION</div>
 
-              <div className="copilot-actions">
+                    <div className="question-box">{question}</div>
+                  </div>
+
+                  <div className="divider" />
+
+                  <div className="copilot-section">
+                    <div className="section-label">SUGGESTED APPROACH</div>
+
+                    <div className="answer-box">
+                      {isGenerating ? (
+                        <div className="generating">
+                          <div className="loading-dots">
+                            <span />
+                            <span />
+                            <span />
+                          </div>
+                          Generating response...
+                        </div>
+                      ) : (
+                        answer
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="copilot-actions">
                 <button
                   type="button"
                   className="secondary-action"
@@ -489,7 +660,9 @@ const App: React.FC = () => {
                   <LightbulbIcon />
                   Hint
                 </button>
-              </div>
+                  </div>
+                </>
+              )}
             </div>
           </section>
         </div>
@@ -515,7 +688,7 @@ const App: React.FC = () => {
             type="button"
             className="ask-button"
             onClick={askAI}
-            disabled={!questionInput.trim() || isGenerating}
+            disabled={isPrivacyMode || !questionInput.trim() || isGenerating}
           >
             Ask AI
             <ArrowUpIcon />
@@ -632,6 +805,22 @@ const ClockIcon = () => (
   >
     <circle cx="12" cy="12" r="9" />
     <path d="M12 7v5l3 2" />
+  </svg>
+);
+
+const LockIcon = () => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="5" y="10" width="14" height="10" rx="2" />
+    <path d="M8 10V7a4 4 0 0 1 8 0v3" />
   </svg>
 );
 
