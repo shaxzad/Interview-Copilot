@@ -215,7 +215,9 @@ const App: React.FC = () => {
       setInterimTranscript(currentInterim.trim());
     };
     recognition.onerror = () => {
-      setMicrophoneError('Microphone access was interrupted. Check your permissions and try again.');
+      setMicrophoneError(
+        'Microphone access was interrupted. Check your permissions and try again.'
+      );
     };
     recognition.onend = () => {
       if (recognitionRef.current === recognition && isListening && !isPaused) {
@@ -573,9 +575,7 @@ const App: React.FC = () => {
                     <span />
                     <span />
                   </div>
-                  <span>
-                    {interimTranscript || 'Listening for conversation...'}
-                  </span>
+                  <span>{interimTranscript || 'Listening for conversation...'}</span>
                 </div>
               )}
 
@@ -635,31 +635,31 @@ const App: React.FC = () => {
                   </div>
 
                   <div className="copilot-actions">
-                <button
-                  type="button"
-                  className="secondary-action"
-                  onClick={() =>
-                    setAnswer(
-                      'Think aloud while answering. Start with the core idea, explain your reasoning, mention trade-offs, and finish with complexity or edge cases.'
-                    )
-                  }
-                >
-                  <RefreshIcon />
-                  Improve
-                </button>
+                    <button
+                      type="button"
+                      className="secondary-action"
+                      onClick={() =>
+                        setAnswer(
+                          'Think aloud while answering. Start with the core idea, explain your reasoning, mention trade-offs, and finish with complexity or edge cases.'
+                        )
+                      }
+                    >
+                      <RefreshIcon />
+                      Improve
+                    </button>
 
-                <button
-                  type="button"
-                  className="secondary-action"
-                  onClick={() =>
-                    setAnswer(
-                      'Break the problem into smaller parts. Define the requirements first, then explain the solution step-by-step and validate it with an example.'
-                    )
-                  }
-                >
-                  <LightbulbIcon />
-                  Hint
-                </button>
+                    <button
+                      type="button"
+                      className="secondary-action"
+                      onClick={() =>
+                        setAnswer(
+                          'Break the problem into smaller parts. Define the requirements first, then explain the solution step-by-step and validate it with an example.'
+                        )
+                      }
+                    >
+                      <LightbulbIcon />
+                      Hint
+                    </button>
                   </div>
                 </>
               )}
