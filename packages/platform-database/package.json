@@ -1,0 +1,11 @@
+{
+  "name": "@company/platform-database",
+  "version": "0.1.0",
+  "description": "Shared MongoDB connection and product database conventions",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": { "build": "tsc", "test": "vitest" },
+  "dependencies": { "mongodb": "^6.3.0" },
+  "devDependencies": { "typescript": "^5.3.3" }
+}

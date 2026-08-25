@@ -1399,6 +1399,25 @@ body {
   background: #211513;
 }
 
+.account-setting-row {
+  align-items: center;
+}
+
+.settings-sign-out {
+  padding: 7px 9px;
+  border: 1px solid rgba(232, 111, 81, 0.28);
+  border-radius: 7px;
+  color: #f2a18b;
+  background: rgba(232, 111, 81, 0.08);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.settings-sign-out:hover {
+  border-color: #e86f51;
+  background: rgba(232, 111, 81, 0.16);
+}
+
 .privacy-notice {
   min-height: 260px;
   display: flex;
@@ -1429,6 +1448,133 @@ body {
 .landing-content,
 .workspace {
   scrollbar-width: none;
+}
+
+.desktop-auth-loading,
+.desktop-auth-page {
+  min-height: 100vh;
+}
+
+.desktop-auth-loading {
+  display: grid;
+  place-items: center;
+  color: #9eada5;
+}
+
+.desktop-auth-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+  align-content: center;
+  gap: 70px;
+  padding: 60px max(28px, 8vw);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(232, 111, 81, 0.12), transparent 34%),
+    #111313;
+}
+
+.desktop-auth-brand {
+  position: absolute;
+  top: 30px;
+  left: 32px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #e86f51;
+  color: #211513;
+  font-weight: 800;
+}
+
+.desktop-auth-copy {
+  max-width: 560px;
+}
+
+.desktop-auth-copy h1 {
+  margin: 16px 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.desktop-auth-copy p {
+  max-width: 430px;
+  color: #8e9793;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.desktop-auth-surface {
+  padding: 28px;
+  border: 1px solid rgba(244, 241, 235, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.desktop-auth-surface .platform-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.desktop-auth-surface .platform-auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.desktop-auth-surface .platform-auth-tabs button,
+.desktop-auth-surface .platform-auth-submit {
+  border: 0;
+  border-radius: 7px;
+  padding: 12px;
+}
+
+.desktop-auth-surface .platform-auth-tabs button {
+  color: #809087;
+  background: transparent;
+  font-size: 12px;
+}
+
+.desktop-auth-surface .platform-auth-tabs button.active {
+  color: #eff4ef;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.desktop-auth-surface .platform-auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #a9b6af;
+  font-size: 11px;
+}
+
+.desktop-auth-surface .platform-auth-form input {
+  padding: 12px;
+  border: 1px solid rgba(235, 242, 237, 0.14);
+  border-radius: 7px;
+  outline: 0;
+  color: #edf2ee;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.desktop-auth-surface .platform-auth-submit {
+  color: #211513;
+  background: #e86f51;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .desktop-auth-page {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 100px 24px 40px;
+  }
 }
 
 .landing-content::-webkit-scrollbar,

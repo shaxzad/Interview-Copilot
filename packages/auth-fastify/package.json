@@ -1,8 +1,7 @@
 {
-  "name": "@company/ai-schemas",
+  "name": "@company/auth-fastify",
   "version": "0.1.0",
-  "private": true,
-  "description": "AI validation schemas using Zod",
+  "description": "Fastify authentication boundary for company APIs",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +10,9 @@
     "test": "vitest"
   },
   "dependencies": {
-    "zod": "^3.22.0"
+    "@company/auth-contracts": "workspace:*",
+    "fastify": "^4.25.0",
+    "fastify-plugin": "^4.5.1"
   },
   "devDependencies": {
     "typescript": "^5.3.3"

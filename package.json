@@ -1,8 +1,8 @@
 {
-  "name": "interview-copilot",
+  "name": "company-platform",
   "version": "0.1.0",
   "private": true,
-  "description": "AI-powered interview preparation and practice platform",
+  "description": "Reusable company platform packages for multi-product SaaS applications",
   "license": "MIT",
   "scripts": {
     "dev": "pnpm --recursive run dev",
@@ -13,6 +13,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\""
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.1",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
     "eslint": "^9.17.0",

@@ -1,4 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { AuthForm } from '@company/platform-ui';
+import { useAuth } from '@company/auth-react';
 
 type SessionType = 'technical' | 'coding' | 'system-design' | 'behavioral';
 
@@ -107,7 +109,9 @@ const getSessionDescription = (sessionType: SessionType) => {
   return SESSION_TYPES.find((session) => session.id === sessionType)?.description ?? '';
 };
 
-const App: React.FC = () => {
+const InterviewWorkspace: React.FC = () => {
+  const { signOut } = useAuth();
+
   const [selectedSession, setSelectedSession] = useState<SessionType>('technical');
 
   const [activeSession, setActiveSession] = useState<SessionType | null>(null);
@@ -503,6 +507,21 @@ const App: React.FC = () => {
               aria-label={`${isPrivacyMode ? 'Disable' : 'Enable'} Privacy Mode`}
             >
               <span />
+            </button>
+          </div>
+
+          <div className="settings-row account-setting-row">
+            <span>
+              <strong>Account</strong>
+              <small>Sign out of this Desktop app</small>
+            </span>
+
+            <button
+              className="settings-sign-out"
+              type="button"
+              onClick={() => void signOut()}
+            >
+              Sign out
             </button>
           </div>
         </div>
@@ -910,5 +929,29 @@ const StopIcon = () => (
     <rect x="6" y="6" width="12" height="12" rx="2" />
   </svg>
 );
+
+const App: React.FC = () => {
+  const { client, user, isLoading } = useAuth();
+
+  if (isLoading) return <div className="desktop-auth-loading">Loading workspace...</div>;
+
+  if (!user) {
+    return (
+      <main className="desktop-auth-page">
+        <div className="desktop-auth-brand">IC</div>
+        <div className="desktop-auth-copy">
+          <div className="eyebrow">INTERVIEW COPILOT DESKTOP</div>
+          <h1>Your practice workspace, everywhere.</h1>
+          <p>Sign in once and keep your account connected across web and desktop.</p>
+        </div>
+        <div className="desktop-auth-surface">
+          <AuthForm client={client} />
+        </div>
+      </main>
+    );
+  }
+
+  return <InterviewWorkspace />;
+};
 
 export default App;

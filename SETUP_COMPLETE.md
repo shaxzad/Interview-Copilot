@@ -169,8 +169,8 @@ pnpm build
 pnpm dev
 
 # Option 2: Individual services
-pnpm --filter @interview-copilot/api dev
-pnpm --filter @interview-copilot/desktop dev
+pnpm --filter @company/api dev
+pnpm --filter @company/desktop dev
 ```
 
 ## Available Commands

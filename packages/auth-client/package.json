@@ -1,14 +1,16 @@
 {
-  "name": "@company/shared-types",
+  "name": "@company/auth-client",
   "version": "0.1.0",
-  "private": true,
-  "description": "Shared TypeScript types",
+  "description": "Platform-neutral authentication and user-management client",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "vitest"
+  },
+  "dependencies": {
+    "@company/auth-contracts": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.3.3"

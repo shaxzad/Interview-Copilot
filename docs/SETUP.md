@@ -52,10 +52,10 @@ pnpm dev
 #### Option B: Run Specific Apps
 ```bash
 # Terminal 1 - API Server
-pnpm --filter @interview-copilot/api dev
+pnpm --filter @company/api dev
 
 # Terminal 2 - Desktop App
-pnpm --filter @interview-copilot/desktop dev
+pnpm --filter @company/desktop dev
 ```
 
 ## Project Structure
@@ -95,16 +95,16 @@ pnpm format           # Format all code
 
 **Desktop App:**
 ```bash
-pnpm --filter @interview-copilot/desktop dev
-pnpm --filter @interview-copilot/desktop build
-pnpm --filter @interview-copilot/desktop test
+pnpm --filter @company/desktop dev
+pnpm --filter @company/desktop build
+pnpm --filter @company/desktop test
 ```
 
 **API Server:**
 ```bash
-pnpm --filter @interview-copilot/api dev
-pnpm --filter @interview-copilot/api build
-pnpm --filter @interview-copilot/api test
+pnpm --filter @company/api dev
+pnpm --filter @company/api build
+pnpm --filter @company/api test
 ```
 
 ## Troubleshooting
