@@ -3,20 +3,24 @@ name: Release
 on:
   push:
     branches: [main]
+    # Avoid running on tags to prevent infinite loops
+    tags:
+      - '*-*'
 
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
-      # needed for npm publish
       id-token: write
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # We need to push back a commit, so we need a token
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -27,12 +31,21 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Version packages
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          version: pnpm changeset version
-          publish: pnpm changeset publish
+      - name: Bump version for all packages
+        run: |
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Bump version for all packages (patch)
+          pnpm version -r --no-git-tag-version patch
+          # The above updates package.json files and creates a new commit? Actually pnpm version does not commit by default when --no-git-tag-version.
+          # We need to commit the changes.
+          git add -A
+          git commit -m "chore: bump all package versions [skip ci]" || echo "No changes to commit"
+          # Push the commit back to main
+          git push origin HEAD:${{ github.ref }}
+
+      - name: Publish packages
+        run: pnpm publish -r --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
