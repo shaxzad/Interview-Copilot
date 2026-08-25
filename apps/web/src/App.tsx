@@ -2,9 +2,32 @@ import { AppShell, AuthForm, ProductGrid, ProductTile } from '@company/platform-
 import { useAuth } from '@company/auth-react';
 
 const PRODUCT_TILES: ProductTile[] = [
-  { id: 'practice', index: '01', title: 'Interview practice', description: 'Run focused technical, behavioral, coding, and system-design sessions.', actionLabel: 'Open workspace', actionIcon: <span>↗</span>, href: '#sessions', featured: true },
-  { id: 'history', index: '02', title: 'Session history', description: 'Review answers, feedback, and the areas that will move you forward.', actionLabel: 'View history', actionIcon: <span>↗</span>, href: '#history' },
-  { id: 'insights', index: '03', title: 'Personal insights', description: 'See your recurring strengths and choose what to practice next.', actionLabel: 'Coming soon' },
+  {
+    id: 'practice',
+    index: '01',
+    title: 'Interview practice',
+    description: 'Run focused technical, behavioral, coding, and system-design sessions.',
+    actionLabel: 'Open workspace',
+    actionIcon: <span>↗</span>,
+    href: '#sessions',
+    featured: true,
+  },
+  {
+    id: 'history',
+    index: '02',
+    title: 'Session history',
+    description: 'Review answers, feedback, and the areas that will move you forward.',
+    actionLabel: 'View history',
+    actionIcon: <span>↗</span>,
+    href: '#history',
+  },
+  {
+    id: 'insights',
+    index: '03',
+    title: 'Personal insights',
+    description: 'See your recurring strengths and choose what to practice next.',
+    actionLabel: 'Coming soon',
+  },
 ];
 
 const App = () => {
@@ -20,9 +43,12 @@ const App = () => {
           <p className="web-kicker">ONE PLATFORM FOR BETTER PRACTICE</p>
           <h1>Build confidence before the conversation begins.</h1>
           <p className="web-intro">
-            Interview Copilot gives your team one focused workspace for practice, preparation, and progress across every device.
+            Interview Copilot gives your team one focused workspace for practice, preparation, and
+            progress across every device.
           </p>
-          <div className="landing-proof"><span /> Web, desktop, and mobile ready</div>
+          <div className="landing-proof">
+            <span /> Web, desktop, and mobile ready
+          </div>
         </section>
         <section className="auth-surface">
           <p className="surface-kicker">INTERVIEW COPILOT</p>
@@ -37,8 +63,18 @@ const App = () => {
   return (
     <AppShell
       productName="Interview Copilot"
-      navigation={<><a href="#overview">Overview</a><a href="#sessions">Sessions</a><a href="#insights">Insights</a></>}
-      actions={<button className="sign-out" onClick={() => void signOut()}>Sign out</button>}
+      navigation={
+        <>
+          <a href="#overview">Overview</a>
+          <a href="#sessions">Sessions</a>
+          <a href="#insights">Insights</a>
+        </>
+      }
+      actions={
+        <button className="sign-out" onClick={() => void signOut()}>
+          Sign out
+        </button>
+      }
     >
       <section className="workspace-hero" id="overview">
         <p className="web-kicker">YOUR WORKSPACE</p>
@@ -46,7 +82,9 @@ const App = () => {
         <p>Choose a product workflow and keep your progress synced across devices.</p>
       </section>
       <ProductGrid id="sessions" items={PRODUCT_TILES} />
-      <div className="sync-note"><span /> Synced through the shared Interview Copilot API</div>
+      <div className="sync-note">
+        <span /> Synced through the shared Interview Copilot API
+      </div>
     </AppShell>
   );
 };

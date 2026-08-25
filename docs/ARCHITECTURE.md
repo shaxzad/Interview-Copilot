@@ -5,29 +5,36 @@
 This is a pnpm monorepo containing multiple related packages:
 
 ### Applications
+
 - **desktop**: Tauri-based desktop application for interview preparation
 - **api**: Fastify REST API server
 
 ### Shared Packages
+
 - **shared-types**: TypeScript type definitions and interfaces
 - **ai-schemas**: Zod validation schemas for AI operations
 
 ## Technology Decisions
 
 ### Desktop: Tauri + React
+
 - **Why Tauri**: Lightweight, single binary, excellent performance, Rust security
 - **Why React**: Component-based, large ecosystem, TypeScript support
 
 ### Backend: Fastify
+
 - **Why Fastify**: Lightweight, fast, excellent plugin ecosystem, built-in validation support
 
 ### Database: MongoDB
+
 - **Why MongoDB**: Flexible schema, good for varied interview data, Atlas for managed hosting
 
 ### State Management: Zustand
+
 - **Why Zustand**: Lightweight, minimal boilerplate, excellent TypeScript support
 
 ### Validation: Zod
+
 - **Why Zod**: Runtime validation, TypeScript-first, excellent error messages, JSON schema support
 
 ## Communication Flow

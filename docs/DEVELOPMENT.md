@@ -46,6 +46,7 @@ Add to `.vscode/launch.json`:
 ## Dependencies
 
 ### Desktop
+
 - React 18
 - Tauri 2
 - TypeScript
@@ -53,24 +54,28 @@ Add to `.vscode/launch.json`:
 - Zustand
 
 ### API
+
 - Fastify
 - MongoDB/Mongoose
 - TypeScript
 - Zod
 
 ### Shared
+
 - Zod (validation)
 - TypeScript
 
 ## Common Issues
 
 ### Build Fails
+
 ```bash
 pnpm install  # Reinstall
 pnpm build    # Rebuild
 ```
 
 ### Workspace not found
+
 ```bash
 pnpm install  # Ensures workspace linking
 ```

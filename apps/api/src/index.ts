@@ -45,7 +45,11 @@ const verifyPassword = async (password: string, storedHash: string) => {
 };
 
 const publicUser = (record: UserRecord): User => {
-  const { passwordHash: _passwordHash, _id: _mongoId, ...user } = record as UserRecord & { _id?: unknown };
+  const {
+    passwordHash: _passwordHash,
+    _id: _mongoId,
+    ...user
+  } = record as UserRecord & { _id?: unknown };
   return user;
 };
 
@@ -74,12 +78,33 @@ app.post('/api/v1/auth/sign-up', async (request, reply) => {
   const now = new Date().toISOString();
   const main_business_id = randomUUID();
   const branch_id = randomUUID();
-  const user: User = { id: randomUUID(), email, name: input.name, main_business_id, branch_id, createdAt: now, updatedAt: now };
-  const slugBase = input.businessName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const user: User = {
+    id: randomUUID(),
+    email,
+    name: input.name,
+    main_business_id,
+    branch_id,
+    createdAt: now,
+    updatedAt: now,
+  };
+  const slugBase = input.businessName
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 
   try {
-    await businesses.insertOne({ id: main_business_id, name: input.businessName, slug: `${slugBase}-${main_business_id.slice(0, 8)}`, createdAt: now });
-    await branches.insertOne({ id: branch_id, main_business_id, name: 'Main Branch', createdAt: now });
+    await businesses.insertOne({
+      id: main_business_id,
+      name: input.businessName,
+      slug: `${slugBase}-${main_business_id.slice(0, 8)}`,
+      createdAt: now,
+    });
+    await branches.insertOne({
+      id: branch_id,
+      main_business_id,
+      name: 'Main Branch',
+      createdAt: now,
+    });
     await users.insertOne({ ...user, passwordHash: await hashPassword(input.password) });
   } catch (error) {
     await Promise.all([
@@ -87,7 +112,8 @@ app.post('/api/v1/auth/sign-up', async (request, reply) => {
       branches.deleteOne({ id: branch_id }),
       users.deleteOne({ id: user.id }),
     ]);
-    if ((error as { code?: number }).code === 11000) return reply.code(409).send({ message: 'An account with this email already exists.' });
+    if ((error as { code?: number }).code === 11000)
+      return reply.code(409).send({ message: 'An account with this email already exists.' });
     throw error;
   }
 
@@ -97,7 +123,8 @@ app.post('/api/v1/auth/sign-up', async (request, reply) => {
 app.post('/api/v1/auth/sign-in', async (request, reply) => {
   const input = SignInSchema.parse(request.body);
   const record = await users.findOne({ email: input.email.toLowerCase() });
-  if (!record || !(await verifyPassword(input.password, record.passwordHash))) return reply.code(401).send({ message: 'Email or password is incorrect.' });
+  if (!record || !(await verifyPassword(input.password, record.passwordHash)))
+    return reply.code(401).send({ message: 'Email or password is incorrect.' });
   return reply.send(await createSession(publicUser(record)));
 });
 
@@ -124,12 +151,28 @@ app.get('/api/v1/organizations', async (request, reply) => {
   if (!user) return reply.code(401).send({ message: 'Authentication required.' });
   const business = await businesses.findOne({ id: user.main_business_id });
   const branch = await branches.findOne({ id: user.branch_id });
-  return reply.send(business && branch ? [{ id: business.id, name: business.name, slug: business.slug, role: 'owner', main_business_id: business.id, branch_id: branch.id }] : []);
+  return reply.send(
+    business && branch
+      ? [
+          {
+            id: business.id,
+            name: business.name,
+            slug: business.slug,
+            role: 'owner',
+            main_business_id: business.id,
+            branch_id: branch.id,
+          },
+        ]
+      : []
+  );
 });
 
 const start = async () => {
   try {
-    await app.listen({ port: Number.parseInt(process.env.API_PORT ?? '3000', 10), host: process.env.API_HOST ?? 'localhost' });
+    await app.listen({
+      port: Number.parseInt(process.env.API_PORT ?? '3000', 10),
+      host: process.env.API_HOST ?? 'localhost',
+    });
     console.log('Server running at http://localhost:3000');
   } catch (error) {
     app.log.error(error);

@@ -43,8 +43,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Bump version for all packages (patch)
           pnpm version -r --no-git-tag-version patch
-          # The above updates package.json files and creates a new commit? Actually pnpm version does not commit by default when --no-git-tag-version.
-          # We need to commit the changes.
+          # Commit the version changes
           git add -A
           git commit -m "chore: bump all package versions [skip ci]" || echo "No changes to commit"
           # Push the commit back to main
