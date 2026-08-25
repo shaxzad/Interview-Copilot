@@ -44,7 +44,10 @@ const tenantPlugin: FastifyPluginAsync<TenantPluginOptions> = async (app, option
     const requestedBranch = this.headers['x-branch-id'];
     const tenant = tenantContextFromUser(this.user);
 
-    if ((requestedBusiness && requestedBusiness !== tenant.main_business_id) || (requestedBranch && requestedBranch !== tenant.branch_id)) {
+    if (
+      (requestedBusiness && requestedBusiness !== tenant.main_business_id) ||
+      (requestedBranch && requestedBranch !== tenant.branch_id)
+    ) {
       throw forbidden('The requested tenant scope is not available to this user.');
     }
 

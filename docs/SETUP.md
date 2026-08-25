@@ -32,6 +32,7 @@ cp .env.example .env
 ```
 
 Update `.env` with your actual values:
+
 - MongoDB connection string
 - API configuration
 - AI service keys (OpenAI, Anthropic)
@@ -45,11 +46,13 @@ pnpm build
 ### 5. Start Development
 
 #### Option A: Run All Apps
+
 ```bash
 pnpm dev
 ```
 
 #### Option B: Run Specific Apps
+
 ```bash
 # Terminal 1 - API Server
 pnpm --filter @company/api dev
@@ -83,6 +86,7 @@ interview-copilot/
 ## Development Commands
 
 ### General Commands
+
 ```bash
 pnpm dev              # Start all apps in development
 pnpm build            # Build all packages
@@ -94,6 +98,7 @@ pnpm format           # Format all code
 ### App-Specific Commands
 
 **Desktop App:**
+
 ```bash
 pnpm --filter @company/desktop dev
 pnpm --filter @company/desktop build
@@ -101,6 +106,7 @@ pnpm --filter @company/desktop test
 ```
 
 **API Server:**
+
 ```bash
 pnpm --filter @company/api dev
 pnpm --filter @company/api build
@@ -110,7 +116,9 @@ pnpm --filter @company/api test
 ## Troubleshooting
 
 ### Port Already in Use
+
 If port 3000 or 5173 is already in use:
+
 ```bash
 # Find and kill process
 lsof -i :3000
@@ -118,6 +126,7 @@ kill -9 <PID>
 ```
 
 ### Dependencies Not Installing
+
 ```bash
 # Clear cache and reinstall
 pnpm store prune
@@ -125,6 +134,7 @@ pnpm install
 ```
 
 ### Module Not Found Errors
+
 ```bash
 # Rebuild packages
 pnpm build

@@ -76,6 +76,7 @@ interview-copilot/
 ## Configuration Files Created
 
 ### Root Level
+
 - ✅ `package.json` - Workspace configuration with dev scripts
 - ✅ `pnpm-workspace.yaml` - Monorepo configuration
 - ✅ `tsconfig.json` - Base TypeScript configuration
@@ -85,7 +86,9 @@ interview-copilot/
 - ✅ `.gitignore` - Git ignore patterns
 
 ### Applications
+
 **Desktop App** (`apps/desktop/`)
+
 - ✅ `package.json` - Dependencies (React, Tauri, TypeScript, etc.)
 - ✅ `tsconfig.json` - React + JSX TypeScript config
 - ✅ `vite.config.ts` - Vite bundler configuration
@@ -98,6 +101,7 @@ interview-copilot/
 - ✅ Starter files: `App.tsx`, `main.tsx`, `index.css`
 
 **API Server** (`apps/api/`)
+
 - ✅ `package.json` - Dependencies (Fastify, MongoDB, TypeScript, etc.)
 - ✅ `tsconfig.json` - Node.js backend TypeScript config
 - ✅ `vitest.config.ts` - Test runner configuration
@@ -105,65 +109,75 @@ interview-copilot/
 - ✅ Starter file: `index.ts` (Fastify server)
 
 ### Shared Packages
+
 **shared-types** (`packages/shared-types/`)
+
 - ✅ `package.json` - Package configuration
 - ✅ `tsconfig.json` - TypeScript configuration
 - ✅ `vitest.config.ts` - Testing configuration
 - ✅ `src/index.ts` - Type definitions
 
 **ai-schemas** (`packages/ai-schemas/`)
+
 - ✅ `package.json` - Package configuration with Zod
 - ✅ `tsconfig.json` - TypeScript configuration
 - ✅ `vitest.config.ts` - Testing configuration
 - ✅ `src/index.ts` - Zod validation schemas
 
 ### Documentation
+
 - ✅ `docs/ARCHITECTURE.md` - System design and architecture
 - ✅ `docs/API.md` - API endpoint documentation
 - ✅ `docs/SETUP.md` - Development setup guide
 - ✅ `docs/DEVELOPMENT.md` - Development tips and debugging
 
 ### CI/CD
+
 - ✅ `.github/workflows/ci.yml` - GitHub Actions pipeline
 
 ### Scripts
+
 - ✅ `scripts/init.sh` - Project initialization script
 - ✅ `scripts/build.sh` - Build all packages script
 
 ## Tech Stack Summary
 
-| Layer | Technology |
-|-------|------------|
-| **Desktop** | Tauri 2 + React 18 + TypeScript |
-| **Native** | Rust (Tauri internals) |
-| **Backend** | Node.js + Fastify + TypeScript |
-| **Database** | MongoDB Atlas |
-| **UI Framework** | Tailwind CSS + shadcn/ui (ready to install) |
-| **State Management** | Zustand |
-| **Validation** | Zod |
-| **Testing** | Vitest + Playwright (ready to configure) |
-| **Package Manager** | pnpm 9 |
-| **Code Quality** | ESLint + Prettier |
+| Layer                | Technology                                  |
+| -------------------- | ------------------------------------------- |
+| **Desktop**          | Tauri 2 + React 18 + TypeScript             |
+| **Native**           | Rust (Tauri internals)                      |
+| **Backend**          | Node.js + Fastify + TypeScript              |
+| **Database**         | MongoDB Atlas                               |
+| **UI Framework**     | Tailwind CSS + shadcn/ui (ready to install) |
+| **State Management** | Zustand                                     |
+| **Validation**       | Zod                                         |
+| **Testing**          | Vitest + Playwright (ready to configure)    |
+| **Package Manager**  | pnpm 9                                      |
+| **Code Quality**     | ESLint + Prettier                           |
 
 ## Getting Started
 
 ### 1. Install Dependencies
+
 ```bash
 pnpm install
 ```
 
 ### 2. Set Environment Variables
+
 ```bash
 cp .env.example .env
 # Edit .env with your settings
 ```
 
 ### 3. Build Shared Packages
+
 ```bash
 pnpm build
 ```
 
 ### 4. Start Development
+
 ```bash
 # Option 1: All services
 pnpm dev
@@ -176,6 +190,7 @@ pnpm --filter @company/desktop dev
 ## Available Commands
 
 ### Development
+
 - `pnpm dev` - Start all apps in development mode
 - `pnpm build` - Build all packages
 - `pnpm test` - Run all tests
@@ -184,6 +199,7 @@ pnpm --filter @company/desktop dev
 - `pnpm format:check` - Check formatting without changes
 
 ### Scripts
+
 - `scripts/init.sh` - Initialize fresh development environment
 - `scripts/build.sh` - Build all packages with detailed output
 
@@ -204,11 +220,13 @@ NODE_ENV=development                    # Environment
 ## Next Steps
 
 1. **Install pnpm dependencies**
+
    ```bash
    pnpm install
    ```
 
 2. **Configure environment**
+
    ```bash
    cp .env.example .env
    ```
@@ -219,6 +237,7 @@ NODE_ENV=development                    # Environment
    - [API.md](docs/API.md) - API endpoints
 
 4. **Start developing**
+
    ```bash
    pnpm dev
    ```

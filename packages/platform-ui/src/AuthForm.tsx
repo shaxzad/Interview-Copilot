@@ -35,10 +35,18 @@ export const AuthForm = ({ client, onSuccess }: { client: AuthClient; onSuccess?
   return (
     <form className="platform-auth-form" onSubmit={submit}>
       <div className="platform-auth-tabs">
-        <button type="button" className={mode === 'sign-in' ? 'active' : ''} onClick={() => setMode('sign-in')}>
+        <button
+          type="button"
+          className={mode === 'sign-in' ? 'active' : ''}
+          onClick={() => setMode('sign-in')}
+        >
           Sign in
         </button>
-        <button type="button" className={mode === 'sign-up' ? 'active' : ''} onClick={() => setMode('sign-up')}>
+        <button
+          type="button"
+          className={mode === 'sign-up' ? 'active' : ''}
+          onClick={() => setMode('sign-up')}
+        >
           Create account
         </button>
       </div>
@@ -50,21 +58,40 @@ export const AuthForm = ({ client, onSuccess }: { client: AuthClient; onSuccess?
           </label>
           <label>
             Business name
-            <input value={businessName} onChange={(event) => setBusinessName(event.target.value)} required />
+            <input
+              value={businessName}
+              onChange={(event) => setBusinessName(event.target.value)}
+              required
+            />
           </label>
         </>
       )}
       <label>
         Work email
-        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+        <input
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
       </label>
       <label>
         Password
-        <input type="password" minLength={8} value={password} onChange={(event) => setPassword(event.target.value)} required />
+        <input
+          type="password"
+          minLength={8}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          required
+        />
       </label>
       {error && <div className="platform-auth-error">{error}</div>}
       <button className="platform-auth-submit" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Connecting...' : mode === 'sign-in' ? 'Continue to workspace' : 'Create workspace'}
+        {isSubmitting
+          ? 'Connecting...'
+          : mode === 'sign-in'
+            ? 'Continue to workspace'
+            : 'Create workspace'}
       </button>
     </form>
   );

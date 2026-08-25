@@ -84,7 +84,7 @@ export class AuthClient {
       await this.request<AuthSession>('/auth/sign-in', {
         method: 'POST',
         body: JSON.stringify(input),
-      }),
+      })
     );
     this.setSession(session);
     return session;
@@ -95,7 +95,7 @@ export class AuthClient {
       await this.request<AuthSession>('/auth/sign-up', {
         method: 'POST',
         body: JSON.stringify(input),
-      }),
+      })
     );
     this.setSession(session);
     return session;
@@ -106,7 +106,7 @@ export class AuthClient {
       await this.request<AuthSession>('/auth/callback', {
         method: 'POST',
         body: JSON.stringify({ clientId: this.clientId, code, redirectUri }),
-      }),
+      })
     );
     this.setSession(session);
     return session;

@@ -34,11 +34,13 @@ export type Feedback = z.infer<typeof FeedbackSchema>;
 export const InterviewAnalysisSchema = z.object({
   totalScore: z.number().min(0).max(100),
   categoryScores: z.record(z.string(), z.number()),
-  transcript: z.array(z.object({
-    questionId: z.string(),
-    answer: z.string(),
-    feedback: FeedbackSchema,
-  })),
+  transcript: z.array(
+    z.object({
+      questionId: z.string(),
+      answer: z.string(),
+      feedback: FeedbackSchema,
+    })
+  ),
   overallFeedback: z.string(),
   areasForImprovement: z.array(z.string()),
 });

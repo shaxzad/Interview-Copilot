@@ -504,10 +504,7 @@ The application must use an abstraction layer.
 interface AIProvider {
   analyzeContext(context: Context): Promise<AIAnalysis>;
   ask(context: Context, question: string): Promise<string>;
-  stream(
-    context: Context,
-    question: string
-  ): AsyncIterable<string>;
+  stream(context: Context, question: string): AsyncIterable<string>;
 }
 ```
 
@@ -638,13 +635,13 @@ Example:
 
 Initial shortcuts:
 
-| Shortcut | Action |
-|---|---|
-| `Cmd + Shift + I` | Toggle Copilot |
-| `Cmd + Shift + A` | Ask AI |
-| `Cmd + Shift + H` | Request hint |
+| Shortcut          | Action                    |
+| ----------------- | ------------------------- |
+| `Cmd + Shift + I` | Toggle Copilot            |
+| `Cmd + Shift + A` | Ask AI                    |
+| `Cmd + Shift + H` | Request hint              |
 | `Cmd + Shift + S` | Request detailed solution |
-| `Cmd + Shift + P` | Analyze screen |
+| `Cmd + Shift + P` | Analyze screen            |
 
 Shortcuts should eventually be configurable.
 
@@ -998,33 +995,33 @@ src-tauri/
 
 # 25. Recommended Technology Stack
 
-| Layer | Technology |
-|---|---|
-| Operating System | macOS |
-| Desktop Framework | Tauri 2 |
-| Frontend | React |
-| Language | TypeScript |
-| Styling | Tailwind CSS |
-| Components | shadcn/ui |
-| State | Zustand |
-| Validation | Zod |
-| Native Backend | Rust |
-| Audio | ScreenCaptureKit + Core Audio/AVFoundation |
-| Speech-to-Text | Cloud streaming STT initially |
-| Vision | Multimodal AI model |
-| AI | Provider abstraction |
-| Backend API | Node.js + Fastify |
-| Backend Language | TypeScript |
-| Database | MongoDB Atlas |
-| MongoDB Driver | Official MongoDB Node.js driver |
-| Testing | Vitest + Playwright |
-| Rust Testing | cargo test |
-| Version Control | Git |
-| Repository | GitHub |
-| IDE | Cursor / VS Code |
-| Packaging | Tauri Bundler |
-| Error Monitoring | Sentry later |
-| CI/CD | GitHub Actions |
+| Layer             | Technology                                 |
+| ----------------- | ------------------------------------------ |
+| Operating System  | macOS                                      |
+| Desktop Framework | Tauri 2                                    |
+| Frontend          | React                                      |
+| Language          | TypeScript                                 |
+| Styling           | Tailwind CSS                               |
+| Components        | shadcn/ui                                  |
+| State             | Zustand                                    |
+| Validation        | Zod                                        |
+| Native Backend    | Rust                                       |
+| Audio             | ScreenCaptureKit + Core Audio/AVFoundation |
+| Speech-to-Text    | Cloud streaming STT initially              |
+| Vision            | Multimodal AI model                        |
+| AI                | Provider abstraction                       |
+| Backend API       | Node.js + Fastify                          |
+| Backend Language  | TypeScript                                 |
+| Database          | MongoDB Atlas                              |
+| MongoDB Driver    | Official MongoDB Node.js driver            |
+| Testing           | Vitest + Playwright                        |
+| Rust Testing      | cargo test                                 |
+| Version Control   | Git                                        |
+| Repository        | GitHub                                     |
+| IDE               | Cursor / VS Code                           |
+| Packaging         | Tauri Bundler                              |
+| Error Monitoring  | Sentry later                               |
+| CI/CD             | GitHub Actions                             |
 
 ---
 
@@ -1556,16 +1553,16 @@ This prevents architectural decisions from being forgotten as the project grows.
 
 Initial targets:
 
-| Metric | Target |
-|---|---:|
-| App startup | < 2 seconds |
-| Copilot open | < 300 ms |
-| Transcript latency | < 2–3 seconds |
-| AI first token | < 2 seconds where provider allows |
-| UI interaction | < 100 ms |
-| Screen analysis | < 5 seconds |
-| Memory usage | Keep as low as practical |
-| Crash rate | Near zero for normal sessions |
+| Metric             |                            Target |
+| ------------------ | --------------------------------: |
+| App startup        |                       < 2 seconds |
+| Copilot open       |                          < 300 ms |
+| Transcript latency |                     < 2–3 seconds |
+| AI first token     | < 2 seconds where provider allows |
+| UI interaction     |                          < 100 ms |
+| Screen analysis    |                       < 5 seconds |
+| Memory usage       |          Keep as low as practical |
+| Crash rate         |     Near zero for normal sessions |
 
 These are engineering targets, not hard guarantees.
 
