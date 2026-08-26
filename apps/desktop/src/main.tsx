@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { AuthClient, createMemoryStorage } from '@company/auth-client';
-import { AuthProvider } from '@company/auth-react';
+import { AuthClient, createMemoryStorage } from '@companyio/auth-client';
+import { AuthProvider } from '@companyio/auth-react';
 import App from './App';
 import './index.css';
 

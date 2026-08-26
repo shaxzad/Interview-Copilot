@@ -1,6 +1,6 @@
 import fp from 'fastify-plugin';
 import { FastifyPluginAsync, FastifyRequest } from 'fastify';
-import { User } from '@company/auth-contracts';
+import { User } from '@companyio/auth-contracts';
 
 export type VerifyAccessToken = (token: string) => Promise<User>;
 
@@ -37,7 +37,7 @@ const authPlugin: FastifyPluginAsync<AuthFastifyOptions> = async (app, options) 
 };
 
 export const authFastify = fp(authPlugin, {
-  name: '@company/auth-fastify',
+  name: '@companyio/auth-fastify',
 });
 
 export const requireUser = async (request: FastifyRequest): Promise<void> => {

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import { randomBytes, randomUUID, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
 import { Collection, MongoClient } from 'mongodb';
-import { AuthSession, SignInSchema, SignUpSchema, User } from '@company/auth-contracts';
+import { AuthSession, SignInSchema, SignUpSchema, User } from '@companyio/auth-contracts';
 
 dotenv.config({ path: new URL('../../../.env', import.meta.url) });
 

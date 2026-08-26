@@ -7,17 +7,17 @@ This repository is the `company-platform` reference monorepo for reusable produc
 After publishing to the company npm registry, a Web, Desktop, or Mobile repository can install the platform packages:
 
 ```bash
-pnpm add @company/auth-client \
-  @company/auth-react \
-  @company/platform-ui \
-  @company/platform-tenancy \
-  @company/platform-database
+pnpm add @companyio/auth-client \
+  @companyio/auth-react \
+  @companyio/platform-ui \
+  @companyio/platform-tenancy \
+  @companyio/platform-database
 ```
 
 The shared contract package is also available when a product needs the underlying types:
 
 ```bash
-pnpm add @company/auth-contracts
+pnpm add @companyio/auth-contracts
 ```
 
 During development inside this monorepo, `workspace:*` links are used instead of the registry. The packages must be published before external repositories can install them.
@@ -25,13 +25,13 @@ During development inside this monorepo, `workspace:*` links are used instead of
 ## Package layers
 
 ```text
-@company/auth-contracts   API schemas, user/session/org types
-@company/auth-client      Platform-neutral auth and user client
-@company/auth-react       AuthProvider and useAuth hook
-@company/auth-fastify     Fastify request authentication boundary
-@company/platform-ui      Shared React application shell primitives
-@company/platform-tenancy Tenant context and request scope enforcement
-@company/platform-database Mongo connection and product database naming
+@companyio/auth-contracts   API schemas, user/session/org types
+@companyio/auth-client      Platform-neutral auth and user client
+@companyio/auth-react       AuthProvider and useAuth hook
+@companyio/auth-fastify     Fastify request authentication boundary
+@companyio/platform-ui      Shared React application shell primitives
+@companyio/platform-tenancy Tenant context and request scope enforcement
+@companyio/platform-database Mongo connection and product database naming
 ```
 
 ## Platform adapters
@@ -121,8 +121,8 @@ The identity service owns identity, email verification, sessions, and organizati
 Create a product repository only for product-specific code. Consume the platform packages from the private npm registry:
 
 ```bash
-pnpm add @company/auth-client @company/auth-react \
-  @company/platform-ui @company/platform-tenancy
+pnpm add @companyio/auth-client @companyio/auth-react \
+  @companyio/platform-ui @companyio/platform-tenancy
 ```
 
 The product application supplies only its `clientId`, API URL, navigation, screens, and domain modules. The platform repository remains the source for shared behavior.

@@ -183,8 +183,8 @@ pnpm build
 pnpm dev
 
 # Option 2: Individual services
-pnpm --filter @company/api dev
-pnpm --filter @company/desktop dev
+pnpm --filter @companyio/api dev
+pnpm --filter @companyio/desktop dev
 ```
 
 ## Available Commands

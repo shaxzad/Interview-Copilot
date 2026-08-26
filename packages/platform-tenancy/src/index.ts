@@ -1,6 +1,6 @@
 import fp from 'fastify-plugin';
 import { FastifyPluginAsync, FastifyRequest } from 'fastify';
-import { User } from '@company/auth-contracts';
+import { User } from '@companyio/auth-contracts';
 
 export type TenantContext = {
   userId: string;
@@ -55,7 +55,7 @@ const tenantPlugin: FastifyPluginAsync<TenantPluginOptions> = async (app, option
   });
 };
 
-export const tenancyFastify = fp(tenantPlugin, { name: '@company/platform-tenancy' });
+export const tenancyFastify = fp(tenantPlugin, { name: '@companyio/platform-tenancy' });
 
 export const requireTenant = async (request: FastifyRequest): Promise<TenantContext> => {
   if (!request.tenant) throw forbidden('Tenant context has not been initialized.');

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { AuthForm } from '@company/platform-ui';
-import { useAuth } from '@company/auth-react';
+import { AuthForm } from '@companyio/platform-ui';
+import { useAuth } from '@companyio/auth-react';
 
 type SessionType = 'technical' | 'coding' | 'system-design' | 'behavioral';
 

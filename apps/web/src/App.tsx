@@ -1,5 +1,5 @@
-import { AppShell, AuthForm, ProductGrid, ProductTile } from '@company/platform-ui';
-import { useAuth } from '@company/auth-react';
+import { AppShell, AuthForm, ProductGrid, ProductTile } from '@companyio/platform-ui';
+import { useAuth } from '@companyio/auth-react';
 
 const PRODUCT_TILES: ProductTile[] = [
   {

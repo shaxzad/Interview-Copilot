@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { AuthClient } from '@company/auth-client';
-import { AuthSession, User } from '@company/auth-contracts';
+import { AuthClient } from '@companyio/auth-client';
+import { AuthSession, User } from '@companyio/auth-contracts';
 
 type AuthContextValue = {
   client: AuthClient;

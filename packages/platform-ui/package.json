@@ -1,5 +1,5 @@
 {
-  "name": "@company/platform-ui",
+  "name": "@companyio/platform-ui",
   "version": "0.1.0",
   "description": "Shared product shell primitives for web, desktop, and mobile-adjacent React apps",
   "type": "module",
@@ -10,7 +10,7 @@
     "test": "exit 0"
   },
   "dependencies": {
-    "@company/auth-client": "workspace:*",
+    "@companyio/auth-client": "workspace:*",
     "react": "^18.2.0"
   },
   "devDependencies": {

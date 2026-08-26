@@ -1,5 +1,5 @@
 {
-  "name": "@company/desktop",
+  "name": "@companyio/desktop",
   "version": "0.1.0",
   "private": true,
   "description": "Interview Copilot Desktop Application",
@@ -13,9 +13,9 @@
     "lint": "eslint src --ext ts,tsx"
   },
   "dependencies": {
-    "@company/auth-client": "workspace:*",
-    "@company/auth-react": "workspace:*",
-    "@company/platform-ui": "workspace:*",
+    "@companyio/auth-client": "workspace:*",
+    "@companyio/auth-react": "workspace:*",
+    "@companyio/platform-ui": "workspace:*",
     "@tauri-apps/api": "^2.0.0",
     "@tauri-apps/plugin-http": "^2.0.0",
     "@tauri-apps/plugin-shell": "^2.0.0",
@@ -23,8 +23,8 @@
     "react-dom": "^18.2.0",
     "zustand": "^4.4.0",
     "axios": "^1.6.0",
-    "@company/shared-types": "workspace:*",
-    "@company/ai-schemas": "workspace:*"
+    "@companyio/shared-types": "workspace:*",
+    "@companyio/ai-schemas": "workspace:*"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.0.0",

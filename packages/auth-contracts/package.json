@@ -1,5 +1,5 @@
 {
-  "name": "@company/auth-contracts",
+  "name": "@companyio/auth-contracts",
   "version": "0.1.0",
   "description": "Shared authentication, user, organization, and permission contracts",
   "type": "module",

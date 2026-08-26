@@ -24,7 +24,7 @@ Every business-owned document must include both fields:
 }
 ```
 
-Every query must start with the authenticated tenant filter. Use `tenantFilter(request.tenant)` from `@company/platform-tenancy`; never accept tenant IDs from the request body. Optional headers may request the current user's own business/branch scope, but the API must reject mismatches.
+Every query must start with the authenticated tenant filter. Use `tenantFilter(request.tenant)` from `@companyio/platform-tenancy`; never accept tenant IDs from the request body. Optional headers may request the current user's own business/branch scope, but the API must reject mismatches.
 
 ## Repository strategy
 
@@ -37,7 +37,7 @@ interview-copilot      Interview product apps and domain API
 company-crm            CRM product apps and domain API
 ```
 
-Each product consumes released `@company/*` packages from the private npm registry. During local development, `workspace:*` links packages.
+Each product consumes released `@companyio/*` packages from the private npm registry. During local development, `workspace:*` links packages.
 
 ## Security and operations
 

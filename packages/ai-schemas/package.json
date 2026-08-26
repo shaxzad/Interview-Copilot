@@ -1,5 +1,5 @@
 {
-  "name": "@company/ai-schemas",
+  "name": "@companyio/ai-schemas",
   "version": "0.1.0",
   "private": true,
   "description": "AI validation schemas using Zod",
