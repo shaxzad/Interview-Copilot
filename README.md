@@ -1780,3 +1780,5 @@ Session History
 ```
 
 This order minimizes risk and gives you a working product early.
+
+NPm publish
