@@ -1,5 +1,5 @@
 {
-  "name": "@company/auth-fastify",
+  "name": "@companyio/auth-fastify",
   "version": "0.1.0",
   "description": "Fastify authentication boundary for company APIs",
   "type": "module",
@@ -10,7 +10,7 @@
     "test": "exit 0"
   },
   "dependencies": {
-    "@company/auth-contracts": "workspace:*",
+    "@companyio/auth-contracts": "workspace:*",
     "fastify": "^4.25.0",
     "fastify-plugin": "^4.5.1"
   },

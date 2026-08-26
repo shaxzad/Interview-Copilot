@@ -1,5 +1,5 @@
 {
-  "name": "@company/auth-react",
+  "name": "@companyio/auth-react",
   "version": "0.1.0",
   "description": "React provider and hooks for the shared authentication platform",
   "type": "module",
@@ -10,8 +10,8 @@
     "test": "exit 0"
   },
   "dependencies": {
-    "@company/auth-client": "workspace:*",
-    "@company/auth-contracts": "workspace:*",
+    "@companyio/auth-client": "workspace:*",
+    "@companyio/auth-contracts": "workspace:*",
     "react": "^18.2.0"
   },
   "devDependencies": {

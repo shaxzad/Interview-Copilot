@@ -9,7 +9,7 @@ import {
   TokenStorage,
   User,
   UserSchema,
-} from '@company/auth-contracts';
+} from '@companyio/auth-contracts';
 
 const memoryStorage = (): TokenStorage => {
   let token: string | null = null;
@@ -152,7 +152,7 @@ export class AuthClient {
     } catch {
       throw {
         code: 'NETWORK_ERROR',
-        message: `Unable to reach the API at ${this.baseUrl}. Start the API with "pnpm --filter @company/api dev" and try again.`,
+        message: `Unable to reach the API at ${this.baseUrl}. Start the API with "pnpm --filter @companyio/api dev" and try again.`,
       } satisfies AuthError;
     }
 

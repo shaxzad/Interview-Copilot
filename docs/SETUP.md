@@ -55,10 +55,10 @@ pnpm dev
 
 ```bash
 # Terminal 1 - API Server
-pnpm --filter @company/api dev
+pnpm --filter @companyio/api dev
 
 # Terminal 2 - Desktop App
-pnpm --filter @company/desktop dev
+pnpm --filter @companyio/desktop dev
 ```
 
 ## Project Structure
@@ -100,17 +100,17 @@ pnpm format           # Format all code
 **Desktop App:**
 
 ```bash
-pnpm --filter @company/desktop dev
-pnpm --filter @company/desktop build
-pnpm --filter @company/desktop test
+pnpm --filter @companyio/desktop dev
+pnpm --filter @companyio/desktop build
+pnpm --filter @companyio/desktop test
 ```
 
 **API Server:**
 
 ```bash
-pnpm --filter @company/api dev
-pnpm --filter @company/api build
-pnpm --filter @company/api test
+pnpm --filter @companyio/api dev
+pnpm --filter @companyio/api build
+pnpm --filter @companyio/api test
 ```
 
 ## Troubleshooting

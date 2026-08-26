@@ -1,6 +1,6 @@
 # Changesets
 
-Add a changeset when a published `@company/*` package changes:
+Add a changeset when a published `@companyio/*` package changes:
 
 ```bash
 pnpm changeset

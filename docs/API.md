@@ -12,7 +12,7 @@ http://localhost:3000/api/v1
 
 ## Authentication
 
-Interactive clients use OAuth 2.0 / OpenID Connect Authorization Code with PKCE. API requests use a short-lived bearer access token. Web applications may use an HTTP-only refresh cookie; desktop and mobile applications provide a secure-storage adapter to `@company/auth-client`.
+Interactive clients use OAuth 2.0 / OpenID Connect Authorization Code with PKCE. API requests use a short-lived bearer access token. Web applications may use an HTTP-only refresh cookie; desktop and mobile applications provide a secure-storage adapter to `@companyio/auth-client`.
 
 ### Auth and Account
 
@@ -29,7 +29,7 @@ GET  /organizations/:id/members
 POST /organizations/:id/invitations
 ```
 
-Protected product routes use `@company/auth-fastify` and call `request.authenticate()` before accessing `request.user`.
+Protected product routes use `@companyio/auth-fastify` and call `request.authenticate()` before accessing `request.user`.
 
 ## Endpoints
 

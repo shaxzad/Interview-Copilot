@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { AuthClient } from '@company/auth-client';
+import { AuthClient } from '@companyio/auth-client';
 
 export const AuthForm = ({ client, onSuccess }: { client: AuthClient; onSuccess?: () => void }) => {
   const [mode, setMode] = useState<'sign-in' | 'sign-up'>('sign-in');

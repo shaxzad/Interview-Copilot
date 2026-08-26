@@ -1,5 +1,5 @@
 {
-  "name": "@company/web",
+  "name": "@companyio/web",
   "version": "0.1.0",
   "private": true,
   "description": "Interview Copilot web application",
@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@company/auth-client": "workspace:*",
-    "@company/auth-react": "workspace:*",
-    "@company/platform-ui": "workspace:*",
+    "@companyio/auth-client": "workspace:*",
+    "@companyio/auth-react": "workspace:*",
+    "@companyio/platform-ui": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
