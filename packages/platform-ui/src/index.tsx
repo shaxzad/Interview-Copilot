@@ -175,3 +175,5 @@ export {
 } from './icons/index';
 
 export type { ProductTile } from './ProductGrid';
+
+export type { SidebarConfig, SidebarNavItem, SidebarSubItem } from './layout/types';

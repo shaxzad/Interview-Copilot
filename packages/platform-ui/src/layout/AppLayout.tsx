@@ -1,16 +1,22 @@
-import { SidebarProvider, useSidebar } from '../context/SidebarContext';
 import { Outlet } from 'react-router-dom';
-import AppHeader from './AppHeader';
-import Backdrop from './Backdrop';
-import AppSidebar from './AppSidebar';
 
-const LayoutContent: React.FC = () => {
+import { SidebarProvider, useSidebar } from '../context/SidebarContext';
+import AppHeader from './AppHeader';
+import AppSidebar from './AppSidebar';
+import Backdrop from './Backdrop';
+import type { SidebarConfig } from './types';
+
+type AppLayoutProps = {
+  config: SidebarConfig;
+};
+
+const LayoutContent: React.FC<AppLayoutProps> = ({ config }) => {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
 
   return (
     <div className="min-h-screen xl:flex">
       <div>
-        <AppSidebar />
+        <AppSidebar config={config} />
         <Backdrop />
       </div>
       <div
@@ -19,7 +25,8 @@ const LayoutContent: React.FC = () => {
         } ${isMobileOpen ? 'ml-0' : ''}`}
       >
         <AppHeader />
-        <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
+
+        <div className="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6">
           <Outlet />
         </div>
       </div>
@@ -27,10 +34,10 @@ const LayoutContent: React.FC = () => {
   );
 };
 
-const AppLayout: React.FC = () => {
+const AppLayout: React.FC<AppLayoutProps> = ({ config }) => {
   return (
     <SidebarProvider>
-      <LayoutContent />
+      <LayoutContent config={config} />
     </SidebarProvider>
   );
 };
