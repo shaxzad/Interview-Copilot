@@ -7,7 +7,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "pnpm run clean && tsc && copyfiles -u 1 \"src/**/*.svg\" dist"
+    "generate-icons": "node scripts/generate-icons.mjs",
+    "build": "pnpm run clean && pnpm run generate-icons && tsc"
   },
   "dependencies": {
     "@companyio/auth-client": "workspace:*",
@@ -32,8 +33,8 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@svgr/cli": "^8.1.0",
     "@types/react": "^18.2.0",
-    "copyfiles": "^2.4.1",
     "typescript": "^5.3.3"
   }
 }
