@@ -6,8 +6,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "exit 0"
+    "clean": "rm -rf dist",
+    "build": "pnpm run clean && tsc && copyfiles -u 1 \"src/**/*.svg\" dist"
   },
   "dependencies": {
     "@companyio/auth-client": "workspace:*",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
+    "copyfiles": "^2.4.1",
     "typescript": "^5.3.3"
   }
 }
