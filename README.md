@@ -330,37 +330,37 @@ This monorepo contains the following npm packages that can be used independently
 
 ### Core Packages
 
-| Package | Description | Key Dependencies |
-| ------- | ----------- | ---------------- |
-| `@companyio/shared-types` | Shared TypeScript types used across all packages | `typescript` |
-| `@companyio/auth-contracts` | Shared authentication, user, organization, and permission contracts using Zod | `zod` |
+| Package                     | Description                                                                   | Key Dependencies |
+| --------------------------- | ----------------------------------------------------------------------------- | ---------------- |
+| `@companyio/shared-types`   | Shared TypeScript types used across all packages                              | `typescript`     |
+| `@companyio/auth-contracts` | Shared authentication, user, organization, and permission contracts using Zod | `zod`            |
 
 ### Authentication Packages
 
-| Package | Description | Key Dependencies |
-| ------- | ----------- | ---------------- |
-| `@companyio/auth-client` | Platform-neutral authentication and user-management client | `@companyio/auth-contracts` |
-| `@companyio/auth-react` | React provider and hooks for the shared authentication platform | `@companyio/auth-client`, `@companyio/auth-contracts`, `react` |
-| `@companyio/auth-fastify` | Fastify authentication boundary for company APIs | `@companyio/auth-contracts`, `fastify`, `fastify-plugin` |
+| Package                   | Description                                                     | Key Dependencies                                               |
+| ------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------- |
+| `@companyio/auth-client`  | Platform-neutral authentication and user-management client      | `@companyio/auth-contracts`                                    |
+| `@companyio/auth-react`   | React provider and hooks for the shared authentication platform | `@companyio/auth-client`, `@companyio/auth-contracts`, `react` |
+| `@companyio/auth-fastify` | Fastify authentication boundary for company APIs                | `@companyio/auth-contracts`, `fastify`, `fastify-plugin`       |
 
 ### UI Packages
 
-| Package | Description | Key Dependencies |
-| ------- | ----------- | ---------------- |
+| Package                  | Description                                                                      | Key Dependencies                                                                                                                                                                                              |
+| ------------------------ | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `@companyio/platform-ui` | Shared product shell primitives for web, desktop, and mobile-adjacent React apps | `@companyio/auth-client`, `@companyio/shared-types`, `react`, `react-apexcharts`, `flatpickr`, `swiper`, `react-router-dom`, `@fullcalendar/*`, `@react-jvectormap/*`, `apexcharts`, `clsx`, `tailwind-merge` |
 
 ### Data Packages
 
-| Package | Description | Key Dependencies |
-| ------- | ----------- | ---------------- |
-| `@companyio/platform-database` | Shared MongoDB connection and product database conventions | `mongodb` |
-| `@companyio/platform-tenancy` | Shared SaaS tenant context and Fastify scope enforcement | `@companyio/auth-contracts`, `fastify`, `fastify-plugin` |
+| Package                        | Description                                                | Key Dependencies                                         |
+| ------------------------------ | ---------------------------------------------------------- | -------------------------------------------------------- |
+| `@companyio/platform-database` | Shared MongoDB connection and product database conventions | `mongodb`                                                |
+| `@companyio/platform-tenancy`  | Shared SaaS tenant context and Fastify scope enforcement   | `@companyio/auth-contracts`, `fastify`, `fastify-plugin` |
 
 ### AI Packages
 
-| Package | Description | Key Dependencies |
-| ------- | ----------- | ---------------- |
-| `@companyio/ai-schemas` | AI validation schemas using Zod | `zod` |
+| Package                 | Description                     | Key Dependencies |
+| ----------------------- | ------------------------------- | ---------------- |
+| `@companyio/ai-schemas` | AI validation schemas using Zod | `zod`            |
 
 ### Usage Example
 
