@@ -1,8 +1,80 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { AuthForm } from '@companyio/platform-ui';
+import React, { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { AuthClient } from '@companyio/auth-client';
 import { useAuth } from '@companyio/auth-react';
 
 type SessionType = 'technical' | 'coding' | 'system-design' | 'behavioral';
+
+const DesktopAuthPanel = ({ client }: { client: AuthClient }) => {
+  const [mode, setMode] = useState<'sign-in' | 'sign-up'>('sign-in');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError('');
+    setIsSubmitting(true);
+    try {
+      if (mode === 'sign-up') {
+        await client.signUp({ name, email, password, businessName: 'Interview Copilot' });
+      } else {
+        await client.signInWithPassword({ email, password });
+      }
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : String(caught));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form className="desktop-auth-form" onSubmit={submit}>
+      <div className="desktop-auth-tabs">
+        <button type="button" onClick={() => setMode('sign-in')} aria-pressed={mode === 'sign-in'}>
+          Sign in
+        </button>
+        <button type="button" onClick={() => setMode('sign-up')} aria-pressed={mode === 'sign-up'}>
+          Create account
+        </button>
+      </div>
+      {mode === 'sign-up' && (
+        <label>
+          Name
+          <input value={name} onChange={(event) => setName(event.target.value)} required />
+        </label>
+      )}
+      <label>
+        Work email
+        <input
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+      </label>
+      <label>
+        Password
+        <input
+          type="password"
+          minLength={8}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          required
+        />
+      </label>
+      {error && <div className="desktop-auth-error">{error}</div>}
+      <button className="desktop-auth-submit" type="submit" disabled={isSubmitting}>
+        {isSubmitting
+          ? 'Connecting...'
+          : mode === 'sign-in'
+            ? 'Continue to workspace'
+            : 'Create workspace'}
+      </button>
+    </form>
+  );
+};
 
 type SessionConfig = {
   id: SessionType;
@@ -941,7 +1013,7 @@ const App: React.FC = () => {
           <p>Sign in once and keep your account connected across web and desktop.</p>
         </div>
         <div className="desktop-auth-surface">
-          <AuthForm client={client} />
+          <DesktopAuthPanel client={client} />
         </div>
       </main>
     );

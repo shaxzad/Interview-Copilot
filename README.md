@@ -1,6 +1,6 @@
-# Interview Copilot - Setup Complete ✅
+# CompanyIO - Setup Complete ✅
 
-This document summarizes the complete monorepo configuration for Interview Copilot.
+This document summarizes the complete monorepo configuration for CompanyIO.
 
 ## Project Structure
 
@@ -39,9 +39,68 @@ interview-copilot/
 │   │   ├── tsconfig.json
 │   │   └── vitest.config.ts
 │   │
+│   ├── auth-client/               # Platform-neutral authentication client
+│   │   ├── src/
+│   │   │   └── index.ts          # Auth client utilities
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── vitest.config.ts
+│   │
+│   ├── auth-contracts/            # Shared auth contracts (zod schemas)
+│   │   ├── src/
+│   │   │   └── index.ts          # Contract definitions
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── vitest.config.ts
+│   │
+│   ├── auth-react/                # React provider and hooks
+│   │   ├── src/
+│   │   │   └── index.tsx         # React auth provider
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── vitest.config.ts
+│   │
+│   ├── auth-fastify/              # Fastify authentication boundary
+│   │   ├── src/
+│   │   │   └── index.ts          # Fastify auth plugin
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── vitest.config.ts
+│   │
+│   ├── platform-ui/               # Shared product shell primitives
+│   │   ├── src/
+│   │   │   ├── AuthForm.tsx      # Auth form component
+│   │   │   ├── index.tsx         # Main export
+│   │   │   ├── ProductGrid.tsx   # Product grid component
+│   │   │   ├── context/          # React contexts
+│   │   │   ├── hooks/            # Custom hooks
+│   │   │   ├── layout/           # Page layouts
+│   │   │   ├── components/       # UI components
+│   │   │   ├── generated-icons/  # Generated icons
+│   │   │   ├── icons/            # Icon definitions
+│   │   │   ├── index.css         # Global styles
+│   │   │   └── vite-env.d.ts     # Vite type env
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── vitest.config.ts
+│   │
+│   ├── platform-database/         # Shared MongoDB connection
+│   │   ├── src/
+│   │   │   └── index.ts          # Database conventions
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── vitest.config.ts
+│   │
+│   ├── platform-tenancy/          # SaaS tenant context
+│   │   ├── src/
+│   │   │   └── index.ts          # Tenant enforcement
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── vitest.config.ts
+│   │
 │   └── ai-schemas/                # Zod validation schemas
 │       ├── src/
-│       │   └── index.ts          # Zod schemas for AI
+│       │   └── index.ts          # AI validation schemas
 │       ├── package.json
 │       ├── tsconfig.json
 │       └── vitest.config.ts
@@ -264,3 +323,65 @@ NODE_ENV=development                    # Environment
 **Created**: August 14, 2024  
 **Setup Version**: 0.1.0  
 **Status**: Ready for Development
+
+## Packages Documentation
+
+This monorepo contains the following npm packages that can be used independently or together:
+
+### Core Packages
+
+| Package                     | Description                                                                   | Key Dependencies |
+| --------------------------- | ----------------------------------------------------------------------------- | ---------------- |
+| `@companyio/shared-types`   | Shared TypeScript types used across all packages                              | `typescript`     |
+| `@companyio/auth-contracts` | Shared authentication, user, organization, and permission contracts using Zod | `zod`            |
+
+### Authentication Packages
+
+| Package                   | Description                                                     | Key Dependencies                                               |
+| ------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------- |
+| `@companyio/auth-client`  | Platform-neutral authentication and user-management client      | `@companyio/auth-contracts`                                    |
+| `@companyio/auth-react`   | React provider and hooks for the shared authentication platform | `@companyio/auth-client`, `@companyio/auth-contracts`, `react` |
+| `@companyio/auth-fastify` | Fastify authentication boundary for company APIs                | `@companyio/auth-contracts`, `fastify`, `fastify-plugin`       |
+
+### UI Packages
+
+| Package                  | Description                                                                      | Key Dependencies                                                                                                                                                                                              |
+| ------------------------ | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@companyio/platform-ui` | Shared product shell primitives for web, desktop, and mobile-adjacent React apps | `@companyio/auth-client`, `@companyio/shared-types`, `react`, `react-apexcharts`, `flatpickr`, `swiper`, `react-router-dom`, `@fullcalendar/*`, `@react-jvectormap/*`, `apexcharts`, `clsx`, `tailwind-merge` |
+
+### Data Packages
+
+| Package                        | Description                                                | Key Dependencies                                         |
+| ------------------------------ | ---------------------------------------------------------- | -------------------------------------------------------- |
+| `@companyio/platform-database` | Shared MongoDB connection and product database conventions | `mongodb`                                                |
+| `@companyio/platform-tenancy`  | Shared SaaS tenant context and Fastify scope enforcement   | `@companyio/auth-contracts`, `fastify`, `fastify-plugin` |
+
+### AI Packages
+
+| Package                 | Description                     | Key Dependencies |
+| ----------------------- | ------------------------------- | ---------------- |
+| `@companyio/ai-schemas` | AI validation schemas using Zod | `zod`            |
+
+### Usage Example
+
+```bash
+# Install all packages
+pnpm install
+
+# Build all packages
+pnpm build
+
+# Start development
+pnpm dev
+
+# Individual package usage
+pnpm --filter @companyio/platform-ui dev
+pnpm --filter @companyio/auth-react dev
+```
+
+### Development Commands
+
+- `pnpm build` - Build all packages
+- `pnpm test` - Run all tests
+- `pnpm lint` - Lint all code
+- `pnpm format` - Format all code with Prettier

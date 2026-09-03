@@ -15,14 +15,7 @@
 
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
-
-    "baseUrl": ".",
-    "paths": {
-      "@shared/*": ["packages/shared-types/src/*"],
-      "@schemas/*": ["packages/ai-schemas/src/*"],
-      "@/*": ["./src/*"]
-    }
+    "sourceMap": true
   },
 
   "include": ["apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts", "packages/**/*.tsx"],

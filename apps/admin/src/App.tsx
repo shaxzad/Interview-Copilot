@@ -1,6 +1,8 @@
 import { AppLayout, ScrollToTop } from '@companyio/platform-ui';
+import { PropsWithChildren } from 'react';
+import { useAuth } from '@companyio/auth-react';
 import { sidebarConfig } from './config/sidebar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import SignIn from './pages/AuthPages/SignIn';
 import SignUp from './pages/AuthPages/SignUp';
@@ -26,6 +28,13 @@ import Videos from './pages/UiElements/Videos';
 import LineChart from './pages/Charts/LineChart';
 import BarChart from './pages/Charts/BarChart';
 
+function RequireAuth({ children }: PropsWithChildren) {
+  const { user, isLoading } = useAuth();
+  if (isLoading)
+    return <div className="flex min-h-screen items-center justify-center">Loading...</div>;
+  return user ? children : <Navigate to="/signin" replace />;
+}
+
 export default function App() {
   return (
     <Router>
@@ -33,7 +42,13 @@ export default function App() {
 
       <Routes>
         {/* Dashboard Layout */}
-        <Route element={<AppLayout config={sidebarConfig} />}>
+        <Route
+          element={
+            <RequireAuth>
+              <AppLayout config={sidebarConfig} />
+            </RequireAuth>
+          }
+        >
           {/* Dashboard */}
           <Route index path="/" element={<Home />} />
 

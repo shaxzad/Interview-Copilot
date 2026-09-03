@@ -4,7 +4,13 @@ import dotenv from 'dotenv';
 import { randomBytes, randomUUID, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
 import { Collection, MongoClient } from 'mongodb';
-import { AuthSession, SignInSchema, SignUpSchema, User } from '@companyio/auth-contracts';
+import {
+  AuthSession,
+  SignInSchema,
+  SignUpSchema,
+  UpdateProfileSchema,
+  User,
+} from '@companyio/auth-contracts';
 
 dotenv.config({ path: new URL('../../../.env', import.meta.url) });
 
@@ -145,7 +151,29 @@ app.get('/api/v1/users/me', async (request, reply) => {
   if (!user) return reply.code(401).send({ message: 'Authentication required.' });
   return reply.send(user);
 });
-
+app.patch('/api/v1/users/me', async (request, reply) => {
+  const user = await getAuthenticatedUser(request.headers.authorization);
+  if (!user) return reply.code(401).send({ message: 'Authentication required.' });
+  const input = UpdateProfileSchema.parse(request.body);
+  const updatedUser: User = {
+    ...user,
+    name: `${input.firstName} ${input.lastName}`,
+    ...input,
+    updatedAt: new Date().toISOString(),
+  };
+  try {
+    await users.updateOne(
+      { id: user.id },
+      { $set: { ...input, name: updatedUser.name, updatedAt: updatedUser.updatedAt } }
+    );
+  } catch (error) {
+    if ((error as { code?: number }).code === 11000)
+      return reply.code(409).send({ message: 'An account with this email already exists.' });
+    throw error;
+  }
+  const session = await createSession(updatedUser);
+  return reply.send({ session, user: updatedUser });
+});
 app.get('/api/v1/organizations', async (request, reply) => {
   const user = await getAuthenticatedUser(request.headers.authorization);
   if (!user) return reply.code(401).send({ message: 'Authentication required.' });

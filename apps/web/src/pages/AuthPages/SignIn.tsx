@@ -1,7 +1,9 @@
 import { PageMeta, SignInForm } from '@companyio/platform-ui';
+import { useAuth } from '@companyio/auth-react';
 import AuthLayout from './AuthPageLayout';
 
 export default function SignIn() {
+  const { client } = useAuth();
   return (
     <>
       <PageMeta
@@ -9,7 +11,7 @@ export default function SignIn() {
         description="This is React.js SignIn Tables Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
       />
       <AuthLayout>
-        <SignInForm />
+        <SignInForm client={client} />
       </AuthLayout>
     </>
   );

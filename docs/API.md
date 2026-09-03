@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Interview Copilot API is a REST API built with Fastify that provides endpoints for interview management, AI-powered question generation, and feedback analysis.
+The CompanyIO API is a REST API built with Fastify that provides endpoints for interview management, AI-powered question generation, and feedback analysis.
 
 ## Base URL
 

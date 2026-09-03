@@ -1,13 +1,40 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { FormEvent, useState } from 'react';
+import { AuthClient } from '@companyio/auth-client';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from '../../icons';
 import Label from '../form/Label';
 import Input from '../form/input/InputField';
 import Checkbox from '../form/input/Checkbox';
 
-export default function SignUpForm() {
+export default function SignUpForm({ client }: { client: AuthClient }) {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError('');
+    setIsSubmitting(true);
+    try {
+      await client.signUp({
+        name: `${firstName} ${lastName}`.trim(),
+        email,
+        password,
+        businessName: 'Interview Copilot',
+      });
+      navigate('/', { replace: true });
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : String(caught));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="flex flex-col flex-1 w-full overflow-y-auto lg:w-1/2 no-scrollbar">
       <div className="w-full max-w-md mx-auto mb-5 sm:pt-10">
@@ -82,7 +109,7 @@ export default function SignUpForm() {
                 </span>
               </div>
             </div>
-            <form>
+            <form onSubmit={submit}>
               <div className="space-y-5">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   {/* <!-- First Name --> */}
@@ -95,6 +122,9 @@ export default function SignUpForm() {
                       id="fname"
                       name="fname"
                       placeholder="Enter your first name"
+                      value={firstName}
+                      onChange={(event) => setFirstName(event.target.value)}
+                      required
                     />
                   </div>
                   {/* <!-- Last Name --> */}
@@ -102,7 +132,15 @@ export default function SignUpForm() {
                     <Label>
                       Last Name<span className="text-error-500">*</span>
                     </Label>
-                    <Input type="text" id="lname" name="lname" placeholder="Enter your last name" />
+                    <Input
+                      type="text"
+                      id="lname"
+                      name="lname"
+                      placeholder="Enter your last name"
+                      value={lastName}
+                      onChange={(event) => setLastName(event.target.value)}
+                      required
+                    />
                   </div>
                 </div>
                 {/* <!-- Email --> */}
@@ -110,7 +148,15 @@ export default function SignUpForm() {
                   <Label>
                     Email<span className="text-error-500">*</span>
                   </Label>
-                  <Input type="email" id="email" name="email" placeholder="Enter your email" />
+                  <Input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    required
+                  />
                 </div>
                 {/* <!-- Password --> */}
                 <div>
@@ -121,6 +167,11 @@ export default function SignUpForm() {
                     <Input
                       placeholder="Enter your password"
                       type={showPassword ? 'text' : 'password'}
+                      name="password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      minLength={8}
+                      required
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
@@ -143,10 +194,15 @@ export default function SignUpForm() {
                     and our <span className="text-gray-800 dark:text-white">Privacy Policy</span>
                   </p>
                 </div>
+                {error && <p className="text-sm text-error-500">{error}</p>}
                 {/* <!-- Button --> */}
                 <div>
-                  <button className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
-                    Sign Up
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !isChecked}
+                    className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {isSubmitting ? 'Creating account...' : 'Sign Up'}
                   </button>
                 </div>
               </div>

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@companyio/auth-client": "workspace:*",
+    "@companyio/auth-contracts": "workspace:*",
     "@companyio/auth-react": "workspace:*",
     "@companyio/platform-ui": "workspace:*",
     "flatpickr": "^4.6.13",

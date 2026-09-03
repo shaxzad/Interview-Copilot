@@ -54,7 +54,7 @@ const authClient = new AuthClient({
 });
 
 <AuthProvider client={authClient}>
-  <AppShell productName="Interview Copilot" actions={<AccountMenu />}>
+  <AppShell productName="CompanyIO" actions={<AccountMenu />}>
     <ProductRoutes />
   </AppShell>
 </AuthProvider>;

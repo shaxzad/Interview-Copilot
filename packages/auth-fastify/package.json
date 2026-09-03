@@ -5,16 +5,29 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
-    "test": "exit 0"
+    "test": "tsc --noEmit"
   },
   "dependencies": {
     "@companyio/auth-contracts": "workspace:*",
-    "fastify": "^4.25.0",
     "fastify-plugin": "^4.5.1"
   },
+  "peerDependencies": {
+    "fastify": "^4.25.0"
+  },
   "devDependencies": {
+    "fastify": "^4.25.0",
     "typescript": "^5.3.3"
   }
 }
