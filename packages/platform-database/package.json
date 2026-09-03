@@ -1,6 +1,6 @@
 {
   "name": "@companyio/platform-database",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Shared MongoDB connection and product database conventions",
   "type": "module",
   "main": "dist/index.js",
