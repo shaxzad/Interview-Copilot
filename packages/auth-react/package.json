@@ -5,17 +5,30 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
-    "test": "exit 0"
+    "test": "tsc --noEmit"
   },
   "dependencies": {
     "@companyio/auth-client": "workspace:*",
-    "@companyio/auth-contracts": "workspace:*",
-    "react": "^18.2.0"
+    "@companyio/auth-contracts": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
+    "react": "^18.2.0",
     "typescript": "^5.3.3"
   }
 }

@@ -41,6 +41,9 @@ importers:
       '@companyio/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
+      '@companyio/auth-contracts':
+        specifier: workspace:*
+        version: link:../../packages/auth-contracts
       '@companyio/auth-react':
         specifier: workspace:*
         version: link:../../packages/auth-react
@@ -291,13 +294,13 @@ importers:
       '@companyio/auth-contracts':
         specifier: workspace:*
         version: link:../auth-contracts
-      fastify:
-        specifier: ^4.25.0
-        version: 4.29.1
       fastify-plugin:
         specifier: ^4.5.1
         version: 4.5.1
     devDependencies:
+      fastify:
+        specifier: ^4.25.0
+        version: 4.29.1
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
@@ -310,13 +313,13 @@ importers:
       '@companyio/auth-contracts':
         specifier: workspace:*
         version: link:../auth-contracts
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
     devDependencies:
       '@types/react':
         specifier: ^18.2.0
         version: 18.3.31
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
@@ -336,13 +339,13 @@ importers:
       '@companyio/auth-contracts':
         specifier: workspace:*
         version: link:../auth-contracts
-      fastify:
-        specifier: ^4.25.0
-        version: 4.29.1
       fastify-plugin:
         specifier: ^4.5.1
         version: 4.5.1
     devDependencies:
+      fastify:
+        specifier: ^4.25.0
+        version: 4.29.1
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
@@ -352,6 +355,12 @@ importers:
       '@companyio/auth-client':
         specifier: workspace:*
         version: link:../auth-client
+      '@companyio/auth-contracts':
+        specifier: workspace:*
+        version: link:../auth-contracts
+      '@companyio/auth-react':
+        specifier: workspace:*
+        version: link:../auth-react
       '@companyio/shared-types':
         specifier: workspace:*
         version: link:../shared-types
@@ -388,9 +397,6 @@ importers:
       flatpickr:
         specifier: ^4.6.13
         version: 4.6.13
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
       react-apexcharts:
         specifier: ^1.8.0
         version: 1.9.0(apexcharts@4.7.0)(react@18.3.1)
@@ -416,6 +422,9 @@ importers:
       '@types/react':
         specifier: ^18.2.0
         version: 18.3.31
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
       typescript:
         specifier: ^5.3.3
         version: 5.9.3

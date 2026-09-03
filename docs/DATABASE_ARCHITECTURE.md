@@ -33,7 +33,7 @@ Start with one platform monorepo for shared packages and separate product reposi
 ```text
 company-platform       Shared auth, tenancy, database helpers, UI, permissions
 smart-school-erp       School API and Web/Desktop/Mobile product apps
-interview-copilot      Interview product apps and domain API
+interview-copilot      CompanyIO interview product apps and domain API
 company-crm            CRM product apps and domain API
 ```
 

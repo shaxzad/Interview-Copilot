@@ -29,7 +29,6 @@ export const AppShell = ({
   </div>
 );
 
-export { AuthForm } from './AuthForm';
 export { ProductGrid } from './ProductGrid';
 export { default as Alert } from './components/ui/alert/Alert';
 export { default as Avatar } from './components/ui/avatar/Avatar';

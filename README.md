@@ -1,6 +1,6 @@
-# Interview Copilot - Setup Complete ✅
+# CompanyIO - Setup Complete ✅
 
-This document summarizes the complete monorepo configuration for Interview Copilot.
+This document summarizes the complete monorepo configuration for CompanyIO.
 
 ## Project Structure
 

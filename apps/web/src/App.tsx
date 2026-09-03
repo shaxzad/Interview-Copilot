@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { PropsWithChildren } from 'react';
+import { useAuth } from '@companyio/auth-react';
 
 import { AppLayout, ScrollToTop } from '@companyio/platform-ui';
 import { sidebarConfig } from './config/sidebar';
@@ -11,13 +13,26 @@ import Calendar from './pages/Calendar';
 import Blank from './pages/Blank';
 import Home from './pages/Dashboard/Home';
 
+function RequireAuth({ children }: PropsWithChildren) {
+  const { user, isLoading } = useAuth();
+  if (isLoading)
+    return <div className="flex min-h-screen items-center justify-center">Loading...</div>;
+  return user ? children : <Navigate to="/signin" replace />;
+}
+
 export default function App() {
   return (
     <Router>
       <ScrollToTop />
 
       <Routes>
-        <Route element={<AppLayout config={sidebarConfig} />}>
+        <Route
+          element={
+            <RequireAuth>
+              <AppLayout config={sidebarConfig} />
+            </RequireAuth>
+          }
+        >
           <Route index path="/" element={<Home />} />
 
           <Route path="/profile" element={<UserProfiles />} />

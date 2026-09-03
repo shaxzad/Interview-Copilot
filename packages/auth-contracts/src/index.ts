@@ -4,6 +4,14 @@ export const UserSchema = z.object({
   id: z.string(),
   email: z.string().email(),
   name: z.string().min(1),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  phone: z.string().optional(),
+  bio: z.string().max(500).optional(),
+  facebookUrl: z.string().url().or(z.literal('')).optional(),
+  xUrl: z.string().url().or(z.literal('')).optional(),
+  linkedinUrl: z.string().url().or(z.literal('')).optional(),
+  instagramUrl: z.string().url().or(z.literal('')).optional(),
   main_business_id: z.string().min(1),
   branch_id: z.string().min(1),
   avatarUrl: z.string().url().optional(),
@@ -56,6 +64,22 @@ export const SignInSchema = z.object({
 });
 
 export type SignInInput = z.infer<typeof SignInSchema>;
+
+export const UpdateProfileSchema = z.object({
+  firstName: z.string().min(1).max(80),
+  lastName: z.string().min(1).max(80),
+  email: z.string().email(),
+  phone: z.string().max(40),
+  bio: z.string().max(500),
+  facebookUrl: z.string().url().or(z.literal('')),
+  xUrl: z.string().url().or(z.literal('')),
+  linkedinUrl: z.string().url().or(z.literal('')),
+  instagramUrl: z.string().url().or(z.literal('')),
+  main_business_id: z.string().min(1),
+  branch_id: z.string().min(1),
+});
+
+export type UpdateProfileInput = z.infer<typeof UpdateProfileSchema>;
 
 export type AuthClientConfig = {
   baseUrl: string;

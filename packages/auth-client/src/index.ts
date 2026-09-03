@@ -5,6 +5,8 @@ import {
   Organization,
   SignInInput,
   SignUpInput,
+  UpdateProfileInput,
+  UpdateProfileSchema,
   SessionSchema,
   TokenStorage,
   User,
@@ -26,6 +28,17 @@ const memoryStorage = (): TokenStorage => {
 };
 
 export const createMemoryStorage = memoryStorage;
+
+export const createBrowserStorage = (): TokenStorage => ({
+  get: async () =>
+    typeof localStorage === 'undefined' ? null : localStorage.getItem('auth_token'),
+  set: async (token) => {
+    if (typeof localStorage !== 'undefined') localStorage.setItem('auth_token', token);
+  },
+  clear: async () => {
+    if (typeof localStorage !== 'undefined') localStorage.removeItem('auth_token');
+  },
+});
 
 export class AuthClient {
   private readonly baseUrl: string;
@@ -63,7 +76,12 @@ export class AuthClient {
       this.setSession(SessionSchema.parse(session));
       return this.sessionValue;
     } catch {
-      await this.signOut();
+      try {
+        await this.signOut();
+      } catch {
+        await this.storage.clear();
+        this.setSession(null);
+      }
       return null;
     }
   }
@@ -114,6 +132,15 @@ export class AuthClient {
 
   async getCurrentUser(): Promise<User> {
     return UserSchema.parse(await this.request<User>('/users/me'));
+  }
+
+  async updateProfile(input: UpdateProfileInput): Promise<User> {
+    const response = await this.request<{ session: AuthSession; user: User }>('/users/me', {
+      method: 'PATCH',
+      body: JSON.stringify(UpdateProfileSchema.parse(input)),
+    });
+    this.setSession(SessionSchema.parse(response.session));
+    return UserSchema.parse(response.user);
   }
 
   async getOrganizations(): Promise<Organization[]> {
